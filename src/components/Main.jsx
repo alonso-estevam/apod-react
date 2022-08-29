@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Main = () => {
   
-  const[image, setImage] = useState()
+  const[info, setInfo] = useState()
   async function handleRequisicao() {
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=IO6PTTTNOu29nSXzv8Toq8FqqRNCJvcOv3ybUVLm`
+      `https://api.nasa.gov/planetary/apod?api_key=zn3IsgyhbVyTpMQrm5CJ7Gb4vWdzdpHcPqw1fc3U&date=`
     );
     const json = await response.json();
     console.log(json);
+    setInfo(json);
   }
 
 
@@ -18,8 +19,9 @@ const Main = () => {
       <form action="">
         <label htmlFor="">Digite uma data</label>
         <input type="number" name="" id="" />
-        <button>Buscar</button>
+        <button onClick={handleRequisicao}>Buscar</button>
       </form>
+      <img src={info ? info.url : ""} alt="" />
       
     </div>
   );
